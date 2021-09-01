@@ -1,12 +1,48 @@
-import React from 'react'
-import { StyleSheet, Text, View } from 'react-native'
+import React, { useEffect, useState } from 'react'
+import { Button } from 'react-native-elements';
+import { View, ActivityIndicator, ScrollView , Image, TouchableOpacity } from 'react-native'
+import { StyleSheet } from 'react-native';
 
-export default function Home() {
+const Home =(props)=>{
     return (
-        <View>
-            <Text>Pantalla Principal</Text>
-        </View>
-    )
+        <ScrollView>
+            <Image
+                source = {require("../assets/Bot.png")}
+                resizeMode="contain"
+                style={styles.image} 
+            />
+            <View>
+                <Button style={styles.buttonScreen}
+                    Color="#244484"
+                    title ="Conversación con una IA" onPress={() => props.navigation.navigate("Chatbot")}
+                />
+                <Button style={styles.buttonScreen} title ="Recomendaciones Para Combatir La Depresión" onPress={() => props.navigation.navigate("Recomend")}/>
+                <Button style={styles.buttonScreen} title ="Acerca De La Aplicación" onPress={() => props.navigation.navigate("Information")}/>
+                <Button style={styles.buttonScreen} title ="Mi Cuenta" onPress={() => props.navigation.navigate("Account")}/>
+            </View>
+            
+        </ScrollView>
+    );
 }
+const styles = StyleSheet.create({
+    container: {
+        //flex: 1,
+        //padding: 35,
+        //backgroundColor: "steelblue",
+    },
+    buttonScreen: {
+        flex: 1,
+        padding: 0,
+        marginBottom: 15,
+        borderBottomWidth: 1,        
+    },
+    image:{
+        height: 150,
+        width: "100%",
+        marginTop: 10,
+        marginEnd: 10
+    }
+})
 
-const styles = StyleSheet.create({})
+export default Home
+// ... other code from the previous section
