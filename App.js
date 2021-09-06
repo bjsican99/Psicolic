@@ -13,12 +13,14 @@ import Account from './screens/account/Account';
 import userGuest from './screens/account/userGuest';
 import userLogged from './screens/account/userLogged';
 import Recomend from './screens/Recomend';
+import RegisterForm from './components/account/RegisterForm';
 
 function HomeScreen() {
   return (
     <Stack.Navigator>
       <Stack.Screen name="Login" component={Login} options={{title: "Acceder a tu Cuenta"}}/>
       <Stack.Screen name="Register" component={Register} options={{title: "Crea una Nueva Cuenta"}}/>
+      <Stack.Screen name="RegisterForm" component={RegisterForm} options={{title: "Crea una Nueva Cuenta"}}/>
       <Stack.Screen name="Home" component={Home} options={{title: 'Pantalla Principal'}}/>
       <Stack.Screen name="Chatbot" component={Chatbot} options = {{title: 'Conversación con una IA'}}/>
       <Stack.Screen name="Information" component={Information} options = {{title: 'Informacion Sobre La APP'}}/>
