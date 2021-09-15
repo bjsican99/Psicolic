@@ -5,7 +5,7 @@ import { size } from 'lodash'
 import { useNavigation } from '@react-navigation/native'
 
 import { validateEmail } from '../../utils/helpers'
-import { addDocumentWithId, getCurrentUser, getToken, registerUser } from '../../utils/actions'
+import { registerUser } from '../../utils/actions'
 import Loading from '../Loading'
 
 export default function RegisterForm() {
@@ -14,7 +14,7 @@ export default function RegisterForm() {
     const [errorEmail, setErrorEmail] = useState("")
     const [errorPassword, setErrorPassword] = useState("")
     const [errorConfirm, setErrorConfirm] = useState("")
-    const [loading, setLoading] = useState(false)
+    const [loading, setLoading] = useState(false) //objeto loading.
 
     const navigation = useNavigation()
 
@@ -22,6 +22,7 @@ export default function RegisterForm() {
         setFormData({ ...formData, [type]: e.nativeEvent.text })
     }
 
+    //funcion tipoflecha para registrar.
     const doRegisterUser = async() => {
         if (!validateData()) {
             return;
@@ -36,9 +37,10 @@ export default function RegisterForm() {
         } 
 
         setLoading(false)
-        navigation.navigate("Account")
+        navigation.navigate("Home")
     }
 
+    //funcion para validar datos de correo y contraseñas
     const validateData = () => {
         setErrorConfirm("")
         setErrorEmail("")
@@ -69,6 +71,7 @@ export default function RegisterForm() {
         return isValid
     }
 
+    //Vista del diseño de pantalla.
     return (
         <View style={styles.form}>
             <Input
@@ -128,6 +131,7 @@ const defaultFormValues = () => {
     return { email: "", password: "", confirm: "" }
 }
 
+//estilos 
 const styles = StyleSheet.create({
     form: {
         marginTop: 30
