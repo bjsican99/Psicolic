@@ -23,7 +23,7 @@ LogBox.ignoreAllLogs()
 function HomeScreen() {
   return (
     <Stack.Navigator>
-      <Stack.Screen name="Login" component={Login} options={{title: "Acceder a tu Cuenta"}}/>
+      <Stack.Screen name="Login" component={Login} options={{title: "Bienvenido, Accede A Tu Cuenta"}}/>
       <Stack.Screen name="Register" component={Register} options={{title: "Crea una Nueva Cuenta"}}/>
       <Stack.Screen name="RegisterForm" component={RegisterForm} options={{title: "Crea una Nueva Cuenta"}}/>
       <Stack.Screen name="LoginForm" component={LoginForm} options={{title: "Iniciar Sesión"}}/>
