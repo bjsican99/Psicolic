@@ -1,0 +1,12 @@
+export const dialogflowConfig = {
+    type: "service_account",
+    project_id: "psicolic-mqax",
+    private_key_id: "31534f07846a8cd8f5818a9d95b8288bcc5401c3",
+    private_key: "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQDG1eyibczZt4OC\nh3924qXQkLJp5tpddikH+jV0ytozHyCjGauWISOc12ykbVL6ZeLLkYtSo/9SM2Df\ntVizCe15MYLfhZQP0ld2i7HwRQlUyiPIhwW9sCyikWS2WivY3Jzz8NeA4R03yHu0\n8kdFEmcqYZdqgm+1X8fJihCLNQ811uu0pnPwukTc6dDOxvzw66MXD5Qo8KvHutah\nxpnF7SdwAxEgJPV1fGNAUJACdNW9P1AOX11yTw6OZqMkCsECyUaJHs7EqJ190gxv\nSxGD+lEgwDjonbk28+dwS3hCLd3YACwKjIh1yIRvP5uX4tbt7emq5bbDvBcYY2dd\nlDsKAqvPAgMBAAECggEAEvnvr5Yoas7nhNmcV02iOEQsWDcUDWoYLblkyKoOJmWI\nyTLLUXSwNWkfO+zDHUAEDnGW3mLlxy6SxvGZGYflBiACNtrvb+MfPc0Z7628X5SQ\nfbQv3r6lmTj5vP2LbxL/AmOwmDg5KvhooLL5Yk+Ipl7SA0mXkl57GXJNHzwHy5d1\nrkq+TjOd+XHnMFwAvf1VCY1NuTOoswPEmnOxFWiiY84WwTMLGWLDmSblyjUVfJpr\nj9t2jvaAI5sZ8vuLP3FAXrCRksArly27xRs4uEIOK2sIMVJfPOZuFZBL4LwWJMr3\ngQGTwC6oJBBQw5dDRJNCmOtVjyKWBq90YqKT69VyYQKBgQDjz2UuGf4AQb1+pEfn\n73kb+Yvd/G5r602+bPLrquxU8YIPqjU5qgpk5eyO0H1kscqHv6uUx1h+XNbcUmUQ\nW2xOYISHaI/CxottSiHxfsF1F9AY8mEaqQhhGDOoCu1Z0EiADvNqRzWJEJzjrirQ\nhih3+sSiZ02eNCgKtRioHJPqOwKBgQDfcKuqNrRZBwN5h4VsBZ5/oUQcEUZqJ42w\npVftsSvVbE/JHchf4H0WCoDcwAKyMJ+5bM/KNKk3UVqdJjprD4WUPRViPMFxQPZ/\nYHe+d0Y9VQR/EUEgP6Y0YFheR9fyLRva3Jx4bXPOyBsSV/RR4siWrk3IPYmaEv6b\nKtgwKVoXfQKBgAaKvCMYx/yF5sUuPopgjB/LiMK1Lw6WUUM4qbkuzV6bGNsOTjz7\nrxS6rZJkVlV/7Yr8bBb3qojmbZ0iGJjhpziQ+P1SeV5kiTh4OoVO2IteRbGRtEwp\nsn3nTgRzW+GKY6qZw0+3/8eR3I+FPuGCGMNpRiBLyyTR5px4Gt8pAu5lAoGBANz5\nouxtuaKqSwdvvcX9MKlspd1UQF1PzNM8Ul9ibsVdnvJ5n+ciLtMThCnNQ11StUQ+\nlqmVtxxcOs9cNT4YVbUrS/ChwXXuF1oV35bggvi5Ef9Q4yWvjQITnpFvX+PENN4Y\nfC6loHiKciuMDLbHIDXVIFu+cE2OJ3rxvmizHMRJAoGAVI7oednjwMFXMQu8upH9\ngD8yEdtkDX3HvV6uFahtOwWtaquVU2iemleg2HtXO798LVjSTA6+9+/tG4odinIS\n9t7taT+Wf03kxZi4JGRpEZcT/VViGfKpwgRB9926YNZJKbgJ8NuSwF4xLZa+g79c\nlg/jPrzx7kPIvK3n9tiTkbY=\n-----END PRIVATE KEY-----\n",
+    "client_email": "psicolic@psicolic-mqax.iam.gserviceaccount.com",
+    "client_id": "113446125835394931082",
+    "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+    "token_uri": "https://oauth2.googleapis.com/token",
+    "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+    "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/psicolic%40psicolic-mqax.iam.gserviceaccount.com"
+}

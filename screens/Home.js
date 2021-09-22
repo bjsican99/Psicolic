@@ -3,14 +3,30 @@ import { Button } from 'react-native-elements';
 import { View, ActivityIndicator, ScrollView , Image, TouchableOpacity } from 'react-native'
 import { StyleSheet } from 'react-native';
 
+import { closeSession, getCurrentUser } from '../../utils/actions'
+
 const Home =(props)=>{
+
+    const [user, setUser] = useState(null)
+    const [user, setUser] = useState(null)
+    const [reloadUser, setReloadUser] = useState(false)
+
+    useEffect(() => {
+        setUser(getCurrentUser())
+        setReloadUser(false)
+    }, [reloadUser])
+    
     return (
         <ScrollView>
             <Image
                 source = {require("../assets/Bot.png")} resizeMode="contain" style={styles.image}/>
             <View>
                 <Button buttonStyle={styles.buttonScreen} Color="#244484"
-                    title ="Conversación con una IA" onPress={() => props.navigation.navigate("Chatbot")}
+                    title ="Conversación con una IA" 
+                    onPress={() => props.navigation.navigate("Chatbot", {
+                        name: user.displayName,
+                        id: user.uid
+                    })}
                 />
                 <Button buttonStyle={styles.buttonScreen} title ="Recomendaciones Para Combatir La Depresión" onPress={() => props.navigation.navigate("Recomend")}/>
                 <Button buttonStyle={styles.buttonScreen} title ="Acerca De La Aplicación" onPress={() => props.navigation.navigate("Information")}/>
