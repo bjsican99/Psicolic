@@ -23,10 +23,7 @@ const Home =(props)=>{
             <View>
                 <Button buttonStyle={styles.buttonScreen} Color="#244484"
                     title ="Conversación con una IA" 
-                    onPress={() => props.navigation.navigate("Chatbot", {
-                        name: user.displayName,
-                        id: user.uid
-                    })}
+                    onPress={() => props.navigation.navigate("Chatbot")}
                 />
                 <Button buttonStyle={styles.buttonScreen} title ="Recomendaciones Para Combatir La Depresión" onPress={() => props.navigation.navigate("Recomend")}/>
                 <Button buttonStyle={styles.buttonScreen} title ="Acerca De La Aplicación" onPress={() => props.navigation.navigate("Information")}/>
