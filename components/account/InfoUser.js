@@ -54,7 +54,6 @@ export default function InfoUser({ user, setLoading, setLoadingText }) { //param
                     }
                 </Text>
                 <Text>{user.email}</Text>
-                <Text>{user.uid}</Text>
             </View>
         </View>
     )

@@ -5,169 +5,259 @@ import { Bubble, GiftedChat } from 'react-native-gifted-chat';
 import { Dialogflow_V2 } from 'react-native-dialogflow';
 import { dialogflowConfig } from '../utils/env'
 
+import { firebaseApp } from '../utils/firebase'
+import * as firebase from 'firebase'
+import 'firebase/firestore'
 
-const avatarBot = require('../assets/avatar-default.jpg')
+
+const botAvatar = require('../assets/avatar-default.jpg')
 const BOT = {
-    _id: 2,
-    name: 'Psicolic',
-    avatar: avatarBot
-}
+  _id: 2,
+  name: 'Mr.Bot',
+  avatar: botAvatar,
+};
 
 class Chatbot extends Component {
-    state = {
-        messages: [
-            //mensajes de forma automatizada.
-            {
-                _id: 2,
-                text: 'Mi Nombre es: ',
-                createdAt: new Date().getTime(),
-                user: BOT
-            },
-            {
-                _id: 1,
-                text: 'Hola Mucho Gusto....',
-                createdAt: new Date().getTime(),
-                user: BOT
-            }
-        ]
-    }
+  state = {
+    messages: [],
+    id: 1,
+    name: '',
+  };
 
-    componentDidMount() {
-        Dialogflow_V2.setConfiguration(
-            dialogflowConfig.client_email,
-            dialogflowConfig.private_key,
-            Dialogflow_V2.LANG_SPANISH,
-            dialogflowConfig.project_id,
-        );
-    }
+  componentDidMount() {
+    Dialogflow_V2.setConfiguration(
+      dialogflowConfig.client_email,
+      dialogflowConfig.private_key,
+      Dialogflow_V2.LANG_ENGLISH_US,
+      dialogflowConfig.project_id,
+    );
 
-    //consulta en dialogflow para mostrar la respuesta adecuada. 
-    //consulta al dialogflow
-    handleGoogleResponce(result) {
-        let text = result.queryResult.fulfillmentMessages[0].text.text[0]
+    const { name, id } = this.props.route.params;
+    firebase.firestore(firebaseApp)
+      .collection('CHATBOT_HISTORY')
+      .doc(id)
+      .collection('MESSAGES')
+      .orderBy('createdAt', 'desc')
+      .limit(15)
+      .get()
+      .then((snapshot) => {
+        let messages = snapshot.docs.map((doc) => {
+          const firebaseData = doc.data();
 
-        this.sendBotResponce(text);
-    }
+          const data = {
+            _id: doc.id,
+            text: doc.text,
+            createdAt: new Date().getTime(),
+            ...firebaseData,
+          };
 
-
-    //Recibe el texto que viene de dialogFlow, y lo muestra en pantalla.
-    //No pasa por dialogFlow
-    sendBotResponce(text) {
-
-        let msg;
-        if (text == 'Info') {
-            msg = {
-                _id: this.state.messages.length + 1,
-                text: 'Decea Saber mas información.',
-                //image: 'https://faros.hsjdbcn.org/sites/default/files/styles/ficha-contenido/public/nino-triste-faros-min.jpg?itok=HwIFI3iE',
-                createdAt: new Date().getTime(),
-                user: BOT
+          if (!firebaseData.system) {
+            data.user = {
+              ...firebaseData.user,
+              name: firebaseData.user.name,
             };
-        } else if (text == 'Mostrar Opciones') {
-            msg = {
-                _id: this.state.messages.length + 1,
-                text: 'Acerca De Que Quiere Obtener Información',
-                createdAt: new Date().getTime(),
-                quickReplies: {
-                    type: 'radio', // or 'checkbox',
-                    keepIt: true,
-                    values: [
-                        {
-                            title: 'Aplicación',
-                            value: 'Aplicacion',
-                            bColor: '#A0522D',
-                            bgColor: '#A0522D',
-                        },
-                        {
-                            title: 'Depresión',
-                            value: 'Depresion',
-                            bColor: '#7B68EE',
-                            bgColor: '#7B68EE',
-                        },
-                    ],
-                },
-            };
+          }
+          return data;
+        });
+
+        if (messages.length > 0) {
+          this.setState({ name, id, messages });
         } else {
-            msg = {
-                _id: this.state.messages.length + 1,
-                text,
-                user: BOT
-            };
+          this.setState({
+            name,
+            id,
+            messages: [
+              {
+                _id: 2,
+                text: `Hello, ${this.props.route.params.name}. My name is Mr. Bot`,
+                createdAt: new Date().getTime(),
+                user: BOT,
+              },
+              {
+                _id: 1,
+                text: 'Hi',
+                createdAt: new Date().getTime(),
+                user: BOT,
+              },
+            ],
+          });
         }
+      })
+      .catch(function (err) {
+        console.log(err);
+      });
+  }
 
-        this.setState((previouseState) => ({
-            messages: GiftedChat.append(previouseState.messages, [msg]),
-        }))
+  handleGoogleResponse(result) {
+    let text = result.queryResult.fulfillmentMessages[0].text.text[0];
+
+    this.sendBotResponse(text);
+  }
+
+  sendBotResponse(text) {
+    let msg;
+
+    if (text == 'travel') {
+      msg = {
+        text: 'Would you like to buy\n a plane ticket?',
+        createdAt: new Date().getTime(),
+        user: BOT,
+      };
+    } else if (text == 'show options') {
+      msg = {
+        text: 'Please choose your destination',
+        createdAt: new Date().getTime(),
+        user: BOT,
+        isOptions: true,
+        data: [
+          {
+            title: 'Thailand',
+            image:
+              'https://travel.mqcdn.com/mapquest/travel/wp-content/uploads/2020/06/GettyImages-636982952-e1592703310661.jpg',
+          },
+          {
+            title: 'USA',
+            image:
+              'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSz6q9FR_WrRIBMgx2QgVBQ3BO_ORQB8-b9qw&usqp=CAU',
+          },
+          {
+            title: 'Japan',
+            image:
+              'https://rccl-h.assetsadobe.com/is/image/content/dam/royal/ports-and-destinations/destinations/japan/assets/japan-fuji-mountain-himeji-castle-full-cherry-blossom-h.jpg?$750x667$',
+          },
+        ],
+      };
+    } else {
+      msg = {
+        text,
+        createdAt: new Date().getTime(),
+        user: BOT,
+      };
     }
 
-    onSend(messages = []) {
-        this.setState((previouseState) => ({
-            messages: GiftedChat.append(previouseState.messages, messages)
-        }))
+    const { id } = this.props.route.params;
 
-        let message = messages[0].text
+    firebase.firestore(firebaseApp)
+      .collection('CHATBOT_HISTORY')
+      .doc(id)
+      .collection('MESSAGES')
+      .add(msg);
 
-        Dialogflow_V2.requestQuery(
-            message,
-            (result) => this.handleGoogleResponce(result),
-            (error) => console.log(error)
-        )
+    msg._id = this.state.messages.length + 1;
+
+    this.setState((previouseState) => ({
+      messages: GiftedChat.append(previouseState.messages, [msg]),
+    }));
+  }
+
+  onSend(messages = []) {
+    this.setState((previouseState) => ({
+      messages: GiftedChat.append(previouseState.messages, messages),
+    }));
+
+    let text = messages[0].text;
+
+    const { id, name } = this.props.route.params;
+
+    firebase.firestore(firebaseApp)
+      .collection('CHATBOT_HISTORY')
+      .doc(id)
+      .collection('MESSAGES')
+      .add({
+        text,
+        createdAt: new Date().getTime(),
+        user: {
+          _id: 1,
+          name: name,
+        },
+      });
+
+    Dialogflow_V2.requestQuery(
+      text,
+      (result) => this.handleGoogleResponse(result),
+      (error) => console.log(error),
+    );
+  }
+
+  onQuickReply(quickReply) {
+    this.setState((previouseState) => ({
+      messages: GiftedChat.append(previouseState.messages, quickReply),
+    }));
+
+    let message = quickReply[0].value;
+
+    Dialogflow_V2.requestQuery(
+      message,
+      (result) => this.handleGoogleResponse(result),
+      (error) => console.log(error),
+    );
+  }
+
+  renderBubble = (props) => {
+    if (props.currentMessage.isOptions) {
+      return (
+        <ScrollView style={{ backgroundColor: 'white' }} horizontal={true}>
+          {props.currentMessage.data.map((item) => (
+            <Card
+              containerStyle={{
+                padding: 0,
+                borderRadius: 15,
+                paddingBottom: 7,
+                overflow: 'hidden',
+              }}
+              key={item.title}>
+              <Card.Image
+                style={{ width: 220, height: 110 }}
+                resizeMode="cover"
+                source={{ uri: item.image }}></Card.Image>
+              <Card.Divider />
+              <Card.Title>{item.title}</Card.Title>
+              <Button
+                title="Choose"
+                style={{ height: 35 }}
+                onPress={() => this.sendBotResponse(item.title)}
+              />
+            </Card>
+          ))}
+        </ScrollView>
+      );
     }
 
-    onQuickReply(quickReply) {
-        this.setState((previouseState) => ({
-            messages: GiftedChat.append(previouseState.messages, quickReply)
-        }))
+    return (
+      <Bubble
+        {...props}
+        textStyle={{
+          right: { color: 'white' },
+          left: { color: 'white' }
+        }}
+        wrapperStyle={{
+          left: { backgroundColor: '#07396b' },
+          right: { backgroundColor: '#195da2' }
+        }}
+      />
+    );
+  };
 
-        let message = quickReply[0].value
-
-        Dialogflow_V2.requestQuery(
-            message,
-            (result) => this.handleGoogleResponce(result),
-            (error) => console.log(error)
-        )
-    }
-
-
-    //estilos para las burbujas de mensajes
-
-    renderBubble = (props) =>{
-        return (
-            <Bubble 
-                {...props} 
-                textStyle = {{
-                    right: {color: 'white'},
-                    left: {color: 'white'}
-                }}
-                wrapperStyle = {{
-                    left: {backgroundColor: '#07396b'}, 
-                    right: {backgroundColor: '#195da2'}
-                }}
-            />
-        )
-    }
-
-    render() {
-        return (
-            <View style={styles.container}>
-                <GiftedChat
-                    messages={this.state.messages}
-                    onSend={(messages) => this.onSend(messages)}
-                    onQuickReply={(quickReply) => this.onQuickReply(quickReply)}
-                    renderBubble = {this.renderBubble}
-                    user={{ _id: 1 }}
-                />
-            </View>
-        )
-    }
+  render() {
+    return (
+      <View style={styles.container}>
+        <GiftedChat
+          messages={this.state.messages}
+          onSend={(messages) => this.onSend(messages)}
+          onQuickReply={(quickReply) => this.onQuickReply(quickReply)}
+          renderBubble={this.renderBubble}
+          user={{ _id: 1 }}
+        />
+      </View>
+    )
+  }
 }
-
 
 export default Chatbot;
 const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        backgroundColor: '#78b8f7'
-    },
+  container: {
+    flex: 1,
+    backgroundColor: '#78b8f7'
+  },
 
 })

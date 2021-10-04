@@ -31,72 +31,72 @@ export default function userLogged() {
                             setLoading={setLoading}
                             setLoadingText={setLoadingText}
 
-                        />                       
+                        />
                     </View>
                 )
             }
             <ScrollView>
                 <View>
-                    <Button 
-                        buttonStyle={styles.buttonScreen} 
+                    <Button
+                        buttonStyle={styles.buttonScreen}
                         containerStyle={styles.btnContainer}
-                        icon = {
+                        icon={
                             <Icon
                                 type="material-community"
                                 name="forum"
-                                iconStyle = {styles.icon}
+                                iconStyle={styles.icon}
                             />
-                        }                       
-                        title =" Conversación con una IA"                    
-                        onPress={() => 
+                        }
+                        title=" Conversación con una IA"
+                        onPress={() =>
                             navigation.navigate("Chatbot", {
                                 name: user.displayName,
                                 id: user.uid
                             })}
                     />
-                    <Button 
-                        buttonStyle={styles.buttonScreen} 
+                    <Button
+                        buttonStyle={styles.buttonScreen}
                         containerStyle={styles.btnContainer}
-                        icon = {
+                        icon={
                             <Icon
                                 type="material-community"
-                                iconStyle = {styles.icon}
-                                name="account-multiple-check"                               
+                                iconStyle={styles.icon}
+                                name="account-multiple-check"
                             />
-                        }  
-                        title =" Recomendaciones Sobre La Depresión" 
+                        }
+                        title=" Recomendaciones Sobre La Depresión"
                         onPress={() => navigation.navigate("Recomend")}
                     />
-                    <Button 
-                        buttonStyle={styles.buttonScreen} 
+                    <Button
+                        buttonStyle={styles.buttonScreen}
                         containerStyle={styles.btnContainer}
-                        icon = {
+                        icon={
                             <Icon
                                 type="material-community"
-                                iconStyle = {styles.icon}
-                                name="cellphone-information"                               
+                                iconStyle={styles.icon}
+                                name="cellphone-information"
                             />
-                        } 
-                        title =" Acerca De La Aplicación" 
+                        }
+                        title=" Acerca De La Aplicación"
                         onPress={() => navigation.navigate("Information")}
                     />
-                    <Button 
-                        buttonStyle={styles.buttonScreen} 
+                    <Button
+                        buttonStyle={styles.buttonScreen}
                         containerStyle={styles.btnContainer}
-                        icon = {
+                        icon={
                             <Icon
                                 type="material-community"
-                                iconStyle = {styles.icon}
-                                name="badge-account-horizontal"                               
+                                iconStyle={styles.icon}
+                                name="badge-account-horizontal"
                             />
-                        } 
-                        title =" Mi Cuenta" 
+                        }
+                        title=" Mi Cuenta"
                         onPress={() => navigation.navigate("Account")}
                     />
                 </View>
             </ScrollView>
         </View>
-        
+
     )
 }
 
@@ -107,11 +107,11 @@ const styles = StyleSheet.create({
     },
     buttonScreen: {
         textAlign: "center",
-        marginTop : 10,
+        marginTop: 10,
         backgroundColor: "#0c7cfc",
         paddingVertical: 12,
         paddingHorizontal: 25,
-        borderRadius: 50     
+        borderRadius: 50
     },
     icon: {
         color: "white",
