@@ -9,6 +9,7 @@ import ChangeEmailForm from './ChangeEmailForm';
 import ChangePasswordForm from './ChangePasswordForm';
 
 export default function AccountOptions({ user, toastRef, setReloadUser}) {
+
     const [showModal, setShowModal] = useState(false)
     const [renderCoponent, setRenderCoponent] = useState(null)
 

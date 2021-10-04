@@ -4,8 +4,9 @@ import { Avatar } from 'react-native-elements/dist/avatar/Avatar'
 
 import { loadImageFromGallery } from '../../utils/helpers'
 import { updateProfile, uploadImage } from '../../utils/actions'
+import { color } from 'react-native-elements/dist/helpers'
 
-export default function InfoUser({ user, setLoading, setLoadingText }) {
+export default function InfoUser({ user, setLoading, setLoadingText }) { //parametros.
     const [photoUrl, setPhotoUrl] = useState(user.photoURL)
 
     const changePhoto = async () => {
@@ -53,6 +54,7 @@ export default function InfoUser({ user, setLoading, setLoadingText }) {
                     }
                 </Text>
                 <Text>{user.email}</Text>
+                <Text>{user.uid}</Text>
             </View>
         </View>
     )
@@ -64,7 +66,7 @@ const styles = StyleSheet.create({
         justifyContent: "center",
         flexDirection: "row",
         backgroundColor: "#f9f9f9",
-        paddingVertical: 30
+        paddingVertical: 30,
     },
     styinfouser: {
         marginLeft: 20,

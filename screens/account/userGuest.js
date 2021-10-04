@@ -17,9 +17,7 @@ export default function userGuest() {
                     style={styles.image} 
                 />
                 <Text style={styles.title}>Consulta tu perfil en la aplicaicon</Text>
-                <Text style={styles.description}>
-                    Mensjae de pruebas.
-                </Text>
+                <Text style={styles.description}>No Ha Iniciado Sesión.</Text>
                 <Button
                     buttonStyle={styles.button}
                     title = "Ver tu perfil"

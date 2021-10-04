@@ -39,7 +39,7 @@ export default function LoginForm() {
           return;
         }
     
-        navigation.navigate("Home");
+        navigation.navigate("HomeAccount");
       };
 
     //funcion para validar datos de correo y contraseñas

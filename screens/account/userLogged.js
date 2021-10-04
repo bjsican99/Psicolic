@@ -34,7 +34,7 @@ export default function userLogged() {
                             setLoading={setLoading} 
                             setLoadingText={setLoadingText}
                         />
-                        <AccountOptions 
+                        <AccountOptions
                             user = { user }
                             toastRef={toastRef}
                             setReloadUser={setReloadUser}

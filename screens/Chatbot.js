@@ -3,8 +3,8 @@ import { StyleSheet, Text, View, ScrollView } from 'react-native'
 import { Card, Button } from 'react-native-elements'
 import { Bubble, GiftedChat } from 'react-native-gifted-chat';
 import { Dialogflow_V2 } from 'react-native-dialogflow';
-
 import { dialogflowConfig } from '../utils/env'
+
 
 const avatarBot = require('../assets/avatar-default.jpg')
 const BOT = {

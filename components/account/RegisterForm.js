@@ -37,7 +37,7 @@ export default function RegisterForm() {
         } 
 
         setLoading(false)
-        navigation.navigate("Home")
+        navigation.navigate("HomeAccount")
     }
 
     //funcion para validar datos de correo y contraseñas

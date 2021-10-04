@@ -5,7 +5,8 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { LogBox } from 'react-native'
 
 //importar los screens
-import Home from './screens/Home';
+import Home from './screens/home/Home';
+import HomeAccount from './screens/home/HomeAccount';
 import Chatbot from './screens/Chatbot';
 import Information from './screens/Information';
 import Login from './screens/account/Login';
@@ -27,6 +28,7 @@ function HomeScreen() {
       <Stack.Screen name="Register" component={Register} options={{title: "Crea una Nueva Cuenta"}}/>
       <Stack.Screen name="RegisterForm" component={RegisterForm} options={{title: "Crea una Nueva Cuenta"}}/>
       <Stack.Screen name="LoginForm" component={LoginForm} options={{title: "Iniciar Sesión"}}/>
+      <Stack.Screen name="HomeAccount" component={HomeAccount} options={{title: 'Pantalla Principal'}}/>
       <Stack.Screen name="Home" component={Home} options={{title: 'Pantalla Principal'}}/>
       <Stack.Screen name="Chatbot" component={Chatbot} options = {{title: 'Conversación con una IA'}}/>
       <Stack.Screen name="Information" component={Information} options = {{title: 'Informacion Sobre La APP'}}/>
