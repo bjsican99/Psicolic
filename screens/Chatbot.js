@@ -13,7 +13,7 @@ import 'firebase/firestore'
 const botAvatar = require('../assets/avatar-default.jpg')
 const BOT = {
   _id: 2,
-  name: 'Mr.Bot',
+  name: 'Psicolic',
   avatar: botAvatar,
 };
 
@@ -68,14 +68,34 @@ class Chatbot extends Component {
             id,
             messages: [
               {
+                _id: 3,
+                text: 'Para comenzar me gustaria realizar 4 preguntas sencillas del PHQ-4 Para evaluar sintomas depresivos\nQuieres comenzar?',
+                createdAt: new Date().getTime(),
+                user: BOT,
+                quickReplies: {
+                  type: 'radio', // or 'checkbox',
+                  keepIt: true,
+                  values: [
+                    {
+                      title: 'Si', value: 'PHQ-4SI',
+                      bColor: 'black', bgColor: 'black',
+                    },
+                    {
+                      title: 'No', value: 'PHQ-4NO',
+                      bColor: '#7B68EE', bgColor: '#7B68EE',
+                    },
+                  ],
+                },
+              },
+              {
                 _id: 2,
-                text: `Hello, ${this.props.route.params.name}. My name is Mr. Bot`,
+                text: 'Si necesitas saber más sobre mi Escribe la palabra Ayuda, y con gusto te apoyare en lo que pueda.',
                 createdAt: new Date().getTime(),
                 user: BOT,
               },
               {
                 _id: 1,
-                text: 'Hi',
+                text: `Hola, ${this.props.route.params.name}. Mi Nombre Es Psicolic\nSoy una inteligencia artificial creada para ayudar a detectar sintomas de depresión.`,
                 createdAt: new Date().getTime(),
                 user: BOT,
               },
@@ -97,41 +117,61 @@ class Chatbot extends Component {
   sendBotResponse(text) {
     let msg;
 
-    if (text == 'travel') {
+    //Opciones rapidas.
+    if (text == 'Info') {
       msg = {
-        text: 'Would you like to buy\n a plane ticket?',
+        _id: this.state.messages.length + 1,
+        text: 'Acerca De Que Quiere Obtener Información',
         createdAt: new Date().getTime(),
-        user: BOT,
+        quickReplies: {
+          type: 'radio', // or 'checkbox',
+          keepIt: true,
+          values: [
+            {
+              title: 'Aplicación', value: 'Aplicacion',
+              bColor: 'black', bgColor: 'black',
+            },
+            {
+              title: 'Depresión', value: 'Depresion',
+              bColor: '#7B68EE', bgColor: '#7B68EE',
+            },
+            {
+              title: 'Pruebas', value: 'Pruebas',
+              bColor: '#7B68EE', bgColor: '#7B68EE',
+            },
+          ],
+        },
       };
-    } else if (text == 'show options') {
+    } else if (text == 'ayuda') {
       msg = {
-        text: 'Please choose your destination',
+        _id: this.state.messages.length + 1,
+        text: 'Estas son las opciones que deberias de saber:',
         createdAt: new Date().getTime(),
-        user: BOT,
-        isOptions: true,
-        data: [
-          {
-            title: 'Thailand',
-            image:
-              'https://travel.mqcdn.com/mapquest/travel/wp-content/uploads/2020/06/GettyImages-636982952-e1592703310661.jpg',
-          },
-          {
-            title: 'USA',
-            image:
-              'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSz6q9FR_WrRIBMgx2QgVBQ3BO_ORQB8-b9qw&usqp=CAU',
-          },
-          {
-            title: 'Japan',
-            image:
-              'https://rccl-h.assetsadobe.com/is/image/content/dam/royal/ports-and-destinations/destinations/japan/assets/japan-fuji-mountain-himeji-castle-full-cherry-blossom-h.jpg?$750x667$',
-          },
-        ],
+        quickReplies: {
+          type: 'radio', // or 'checkbox',
+          keepIt: true,
+          values: [
+            {
+              title: 'Comandos', value: 'Comandos',
+              bColor: 'black', bgColor: 'black',
+            },
+            {
+              title: 'Depresión', value: 'Depresion',
+              bColor: '#7B68EE', bgColor: '#7B68EE',
+            },
+            {
+              title: 'Pruebas', value: 'Pruebas',
+              bColor: '#7B68EE', bgColor: '#7B68EE',
+            },
+          ],
+        },
       };
-    } else {
+    }
+    else {
       msg = {
+        _id: this.state.messages.length + 1,
         text,
-        createdAt: new Date().getTime(),
-        user: BOT,
+        user: BOT
       };
     }
 
@@ -193,36 +233,9 @@ class Chatbot extends Component {
     );
   }
 
-  renderBubble = (props) => {
-    if (props.currentMessage.isOptions) {
-      return (
-        <ScrollView style={{ backgroundColor: 'white' }} horizontal={true}>
-          {props.currentMessage.data.map((item) => (
-            <Card
-              containerStyle={{
-                padding: 0,
-                borderRadius: 15,
-                paddingBottom: 7,
-                overflow: 'hidden',
-              }}
-              key={item.title}>
-              <Card.Image
-                style={{ width: 220, height: 110 }}
-                resizeMode="cover"
-                source={{ uri: item.image }}></Card.Image>
-              <Card.Divider />
-              <Card.Title>{item.title}</Card.Title>
-              <Button
-                title="Choose"
-                style={{ height: 35 }}
-                onPress={() => this.sendBotResponse(item.title)}
-              />
-            </Card>
-          ))}
-        </ScrollView>
-      );
-    }
+  //estilos para las burbujas de mensajes
 
+  renderBubble = (props) => {
     return (
       <Bubble
         {...props}
@@ -235,8 +248,8 @@ class Chatbot extends Component {
           right: { backgroundColor: '#195da2' }
         }}
       />
-    );
-  };
+    )
+  }
 
   render() {
     return (
@@ -253,11 +266,12 @@ class Chatbot extends Component {
   }
 }
 
+
 export default Chatbot;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#78b8f7'
+    backgroundColor: '#3e4144'
   },
 
 })
