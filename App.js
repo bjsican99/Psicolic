@@ -14,7 +14,9 @@ import Register from './screens/account/Register';
 import Account from './screens/account/Account';
 import userGuest from './screens/account/userGuest';
 import userLogged from './screens/account/userLogged';
-import Recomend from './screens/Recomend';
+import Recomend from './screens/Recomend/Recomend';
+import AddRecomend from './screens/Recomend/AddRecomend';
+import Recomendacion from './screens/Recomend/Recomendacion';
 import RegisterForm from './components/account/RegisterForm';
 import LoginForm from './components/account/LoginForm';
 import AccountOptions from './components/account/AccountOptions';
@@ -33,6 +35,8 @@ function HomeScreen() {
       <Stack.Screen name="Chatbot" component={Chatbot} options = {{title: 'Conversación con una IA'}}/>
       <Stack.Screen name="Information" component={Information} options = {{title: 'Informacion Sobre La APP'}}/>
       <Stack.Screen name="Recomend" component={Recomend} options = {{title: 'Recomendaciones Generales.'}}/>
+      <Stack.Screen name="AddRecomend" component={AddRecomend} options = {{title: 'Agregar Recomendación'}}/>
+      <Stack.Screen name="Recomendacion" component={Recomendacion} options = {{title: 'Recomendación'}}/>
       <Stack.Screen name="Account" component={Account} options = {{title: 'Mi Cuenta'}}/>
       <Stack.Screen name="userGuest" component={userGuest} options = {{title: 'Mi Cuenta'}}/>
       <Stack.Screen name="userLogged" component={userLogged} options = {{title: 'Mi Cuenta'}}/>
