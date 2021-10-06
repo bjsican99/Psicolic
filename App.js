@@ -8,7 +8,7 @@ import { LogBox } from 'react-native'
 import Home from './screens/home/Home';
 import HomeAccount from './screens/home/HomeAccount';
 import Chatbot from './screens/Chatbot';
-import Information from './screens/Information';
+import Information from './screens/Information/Information';
 import Login from './screens/account/Login';
 import Register from './screens/account/Register';
 import Account from './screens/account/Account';

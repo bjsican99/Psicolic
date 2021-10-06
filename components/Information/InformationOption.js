@@ -4,11 +4,12 @@ import { map } from 'lodash';
 import { Icon, ListItem } from 'react-native-elements';
 
 import Modal from '../Modal';
-import ChangeDisplayNameForm from './ChangeDisplayNameForm';
-import ChangeEmailForm from './ChangeEmailForm';
-import ChangePasswordForm from './ChangePasswordForm';
+import DisplayApp from './DisplayApp';
+import DisplayAyuda from './DisplayAyuda';
+import DisplayDiagnostico from './DisplayDiagnostico';
+import DisplayDepresion from './DisplayDepresion';
 
-export default function AccountOptions({ user, toastRef, setReloadUser }) {
+export default function InformationOption() {
 
     const [showModal, setShowModal] = useState(false)
     const [renderCoponent, setRenderCoponent] = useState(null)
@@ -17,60 +18,60 @@ export default function AccountOptions({ user, toastRef, setReloadUser }) {
     const generateOptions = () => {
         return [
             {
-                title: "Cambiar Nombres y Apellidos.",
-                iconNameLeft: "account-circle",
-                iconColorLeft: "#52BE80",
+                title: "Acerca De La App.",
+                iconNameLeft: "information",
+                iconColorLeft: "#3498DB",
                 iconNameRight: "chevron-right",
                 iconColorRight: "#17202A",
-                onPress: () => selectedComponent("displayName")
+                onPress: () => selectedComponent("App")
             },
             {
-                title: "Cambiar Correo.",
-                iconNameLeft: "at",
-                iconColorLeft: "#2980B9",
+                title: "No Reemplazo la ayuda profesional.",
+                iconNameLeft: "account-multiple",
+                iconColorLeft: "#48C9B0",
                 iconNameRight: "chevron-right",
                 iconColorRight: "#17202A",
-                onPress: () => selectedComponent("email")
+                onPress: () => selectedComponent("ayuda")
             },
             {
-                title: "Cambiar Contraseña.",
-                iconNameLeft: "lock-reset",
-                iconColorLeft: "#DC7633",
+                title: "No Determino un Diagnostico.",
+                iconNameLeft: "medical-bag",
+                iconColorLeft: "#EC7063",
                 iconNameRight: "chevron-right",
                 iconColorRight: "#17202A",
-                onPress: () => selectedComponent("password")
+                onPress: () => selectedComponent("diagnostico")
+            },
+            {
+                title: "La Depresión.",
+                iconNameLeft: "hospital-box",
+                iconColorLeft: "#F1C40F",
+                iconNameRight: "chevron-right",
+                iconColorRight: "#17202A",
+                onPress: () => selectedComponent("diagnostico")
             }
         ]
     }
 
     const selectedComponent = (key) => {
         switch (key) {
-            case "displayName":
+            case "App":
                 setRenderCoponent(
-                    <ChangeDisplayNameForm
-                        displayName={user.displayName}
-                        setShowModal={setShowModal}
-                        toastRef={toastRef}
-                        setReloadUser={setReloadUser}
-                    />
+                    <DisplayApp/>
                 )
                 break;
-            case "email":
+            case "ayuda":
                 setRenderCoponent(
-                    <ChangeEmailForm
-                        email={user.email}
-                        setShowModal={setShowModal}
-                        toastRef={toastRef}
-                        setReloadUser={setReloadUser}
-                    />
+                    <DisplayAyuda/>
                 )
                 break;
-            case "password":
+            case "diagnostico":
                 setRenderCoponent(
-                    <ChangePasswordForm
-                        setShowModal={setShowModal}
-                        toastRef={toastRef}
-                    />
+                    <DisplayDiagnostico/>
+                );
+                break;
+            case "diagnostico":
+                setRenderCoponent(
+                    <DisplayDepresion/>
                 );
                 break;
         }
@@ -80,7 +81,7 @@ export default function AccountOptions({ user, toastRef, setReloadUser }) {
     const menuOptions = generateOptions();
 
     return (
-        <View>
+        <View style={styles.container}>
             {
                 map(menuOptions, (menu, index) => (
                     <ListItem
