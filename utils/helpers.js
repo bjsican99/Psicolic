@@ -10,18 +10,24 @@ export function validateEmail(email) {
 //importar desde galeria
 export const loadImageFromGallery = async(array) => {
     const response = { status: false, image: null }
-    const resultPermissions = await Permissions.askAsync(Permissions.CAMERA)
+    const resultPermissions = await Permissions.askAsync(Permissions.CAMERA_ROLL)
     if(resultPermissions.status === "denied") {
         Alert.alert("Debes de dar permiso para acceder a las imágenes de la Galería.")
         return response
+    }else {
+        
     }
+
     const result = await ImagePicker.launchImageLibraryAsync({
+        mediaTypes: ImagePicker.MediaTypeOptions.Images,
         allowsEditing: true,
         aspect: array
     })
+
     if(result.cancelled){
         return response
     }
+
     response.status = true
     response.image = result.uri
     return response 
