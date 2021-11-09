@@ -21,6 +21,7 @@ export default function userLogged() {
         setReloadUser(false)
     }, [reloadUser])
 
+
     return (
         <View style={styles.container}>
             {

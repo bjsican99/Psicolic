@@ -77,11 +77,11 @@ class Chatbot extends Component {
                   keepIt: true,
                   values: [
                     {
-                      title: 'Si', value: 'PHQ-4SI',
+                      title: 'Si', value: 'Prueba',
                       bColor: 'black', bgColor: 'black',
                     },
                     {
-                      title: 'No', value: 'PHQ-4NO',
+                      title: 'No', value: 'no',
                       bColor: '#7B68EE', bgColor: '#7B68EE',
                     },
                   ],
@@ -89,13 +89,13 @@ class Chatbot extends Component {
               },
               {
                 _id: 2,
-                text: 'Si necesitas saber más sobre mi Escribe la palabra Ayuda, y con gusto te apoyare en lo que pueda.',
+                text: 'Si necesitas saber más sobre mi Escribe la palabra Información, y con gusto te apoyare en lo que pueda.',
                 createdAt: new Date().getTime(),
                 user: BOT,
               },
               {
                 _id: 1,
-                text: `Hola, ${this.props.route.params.name}. Mi Nombre Es Psicolic\nSoy una inteligencia artificial creada para ayudar a detectar sintomas de depresión.`,
+                text: `Hola, ${this.props.route.params.name}. Mi Nombre Es Elizabeth\nSoy una inteligencia artificial creada para ayudar a detectar sintomas de depresión.`,
                 createdAt: new Date().getTime(),
                 user: BOT,
               },
